@@ -5,7 +5,7 @@ yum install nodejs -y
 yum install gcc-* -y
 
 
-
+conda update conda -y
 conda create -n jp --clone base
 conda activate jp
 pip install jupyterhub jupyterlab
@@ -14,12 +14,25 @@ jupyter labextension install @jupyterlab/hub-extension
 pip install jupyter-server-proxy
 pip install jupyter-vscode-proxy
 pip install jupyter-rsession-proxy
+pip install jupyter-c-kernel
+install_c_kernel
 
 
-conda create -n C -y
-conda activate C
+conda create -n C++ -y
+conda activate C++
 conda install conda -y
-pip install ipykernel 
+pip install ipykernel
+conda install xeus-cling -c conda-forge -y
+cp -r /opt/anaconda3/envs/C++/share/jupyter/kernels/xcpp11 /opt/anaconda3/envs/jp/share/jupyter/kernels/xcpp11
+cp -r /opt/anaconda3/envs/C++/share/jupyter/kernels/xcpp14 /opt/anaconda3/envs/jp/share/jupyter/kernels/xcpp14
+cp -r /opt/anaconda3/envs/C++/share/jupyter/kernels/xcpp17 /opt/anaconda3/envs/jp/share/jupyter/kernels/xcpp17
+
+conda create -n fortran -y
+conda activate fortran 
+conda install conda -y
+pip install ipykernel
+conda install lfortran -c conda-forge -y
+cp -r /opt/anaconda3/envs/fortran/share/jupyter/kernels/fortran /opt/anaconda3/envs/jp/share/jupyter/kernels/fortran
 
 
 
