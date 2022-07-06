@@ -35,5 +35,14 @@ conda install lfortran -c conda-forge -y
 cp -r /opt/anaconda3/envs/fortran/share/jupyter/kernels/fortran /opt/anaconda3/envs/jp/share/jupyter/kernels/fortran
 
 
+wget -P /opt https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz
+tar -zvxf /opt/julia-1.7.3-linux-x86_64.tar.gz
+conda create -n julia -y
+conda activate julia
+conda install conda -y
+pip install ipykernel
+
+
+
 
 EOF';" 
