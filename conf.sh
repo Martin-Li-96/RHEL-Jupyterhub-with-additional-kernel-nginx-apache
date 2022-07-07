@@ -88,11 +88,11 @@ pip install -U sshkernel
 python -m sshkernel install --sys-prefix
 cp -r /opt/anaconda3/envs/ssh/share/jupyter/kernels/ssh /opt/anaconda3/envs/jp/share/jupyter/kernels/ssh
 
-cat <<EOF > /opt/Rconfig.r
+cat <<EOF_in > /opt/Rconfig.r
 install.packages('IRkernel',repos='https://cran.r-project.org')
 IRkernel::installspec()
 IRkernel::installspec(user = FALSE)
-EOF
+EOF_in
 Rscript /opt/Rconfig.r
 cp -r /root/.local/share/jupyter/kernels/ir /opt/anaconda3/envs/jp/share/jupyter/kernels/ir
 
