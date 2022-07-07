@@ -44,10 +44,10 @@ conda install lfortran -c conda-forge -y
 cp -r /opt/anaconda3/envs/fortran/share/jupyter/kernels/fortran /opt/anaconda3/envs/jp/share/jupyter/kernels/fortran
 wget -P /opt https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz
 tar -zvxf /opt/julia-1.7.3-linux-x86_64.tar.gz -C /opt
-cat <<EOF_in >>/etc/profile
+cat <<'EOF_in' >>/etc/profile
 export PATH=$PATH:/opt/julia-1.7.3/bin
 EOF_in
-cat <<EOF_in >/opt/Jconf.jl
+cat <<'EOF_in' >/opt/Jconf.jl
 import Pkg
 Pkg.add('IJulia')
 EOF_in
@@ -61,7 +61,7 @@ do
 done
 rpm -ivh jdk-18_linux-x64_bin.rpm
 
-cat <<EOF_in >> /etc/profile
+cat <<'EOF_in' >> /etc/profile
 export JAVA_HOME=/usr/java/jdk-18.0.1.1
 export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOMR/bin
@@ -88,7 +88,7 @@ pip install -U sshkernel
 python -m sshkernel install --sys-prefix
 cp -r /opt/anaconda3/envs/ssh/share/jupyter/kernels/ssh /opt/anaconda3/envs/jp/share/jupyter/kernels/ssh
 
-cat <<EOF_in > /opt/Rconfig.r
+cat <<'EOF_in' > /opt/Rconfig.r
 install.packages('IRkernel',repos='https://cran.r-project.org')
 IRkernel::installspec()
 IRkernel::installspec(user = FALSE)
@@ -131,7 +131,7 @@ conda activate tensorflow
 conda install conda -y
 pip install ipykernel
 conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
-cat <<EOF_in >> /etc/profile
+cat <<'EOF_in' >> /etc/profile
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
 EOF_in
 source /etc/profile
@@ -215,7 +215,7 @@ tar -zvxf /opt/jetbrain/RubyMine-2021.1.3.tar.gz
 tar -zvxf /opt/jetbrain/WebStorm-2021.1.3.tar.gz
 
 
-cat <<EOF_in >> /etc/profile
+cat <<'EOF_in' >> /etc/profile
 export PATH=$PATH:/opt/Jetbrain/clion-2021.1.3/bin
 export PATH=$PATH:/opt/Jetbrain/DataGrip-2021.1.3/bin
 export PATH=$PATH:/opt/Jetbrain/GoLand-2021.1.3/bin
@@ -232,7 +232,7 @@ rm -rf /opt/rstudio-server-rhel-2022.02.3-492-x86_64.rpm
 rm -rf /opt/julia-1.7.3-linux-x86_64.tar.gz
 rm -rf /opt/jdk-18_linux-x64_bin.rpm
 rm -rf /opt/ijava-1.3.0.zip
-EOF';gnome-terminal --window --title='CONF_STEP2' -- bash -c 'cat <<EOF_in >~/Jconf.jl
+EOF';gnome-terminal --window --title='CONF_STEP2' -- bash -c 'cat <<'EOF_in' >~/Jconf.jl
 import Pkg
 Pkg.add('IJulia')
 EOF_in;/opt/julia-1.7.3/bin/julia /opt/Jconf.jl;'" 
