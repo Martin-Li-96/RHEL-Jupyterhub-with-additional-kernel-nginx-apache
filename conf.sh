@@ -185,11 +185,48 @@ chmod 777 /opt/xampp-linux-x64-8.1.6-0-installer.run
 yum install nginx -y
 cp -r /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 
+wget -P /opt/jetbrain https://download.jetbrains.com/cpp/CLion-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://download.jetbrains.com/datagrip/datagrip-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://download.jetbrains.com/go/goland-2021.1.3.tar.gz
 
 
+wget -P /opt/jetbrain https://download.jetbrains.com/idea/ideaIU-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://download.jetbrains.com/webide/PhpStorm-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://download.jetbrains.com/python/pycharm-professional-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://download.jetbrains.com/ruby/RubyMine-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.tar.gz
+
+wget -P /opt/jetbrain https://github.com/Martin-Li-96/RHEL-Jupyterhub-with-additional-kernel-nginx-apache/releases/download/beta/ide-eval-resetter-2.1.9.zip
+
+cd /opt/jetbrain
+tar -zvxf /opt/jetbrain/CLion-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/datagrip-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/goland-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/ideaIU-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/PhpStorm-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/pycharm-professional-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/RubyMine-2021.1.3.tar.gz
+tar -zvxf /opt/jetbrain/WebStorm-2021.1.3.tar.gz
 
 
-
+cat <<EOF_in >> /etc/profile
+export PATH=$PATH:/opt/Jetbrain/clion-2021.1.3/bin
+export PATH=$PATH:/opt/Jetbrain/DataGrip-2021.1.3/bin
+export PATH=$PATH:/opt/Jetbrain/GoLand-2021.1.3/bin
+export PATH=$PATH:/opt/Jetbrain/idea-IU-211.7628.21/bin
+export PATH=$PATH:/opt/Jetbrain/PhpStorm-211.7442.50/bin
+export PATH=$PATH:/opt/Jetbrain/pycharm-2021.1.3/bin
+export PATH=$PATH:/opt/Jetbrain/RubyMine-2021.1.3/bin
+export PATH=$PATH:/opt/Jetbrain/WebStorm-211.7628.25/bin
+EOF_in
+source /etc/profile
+rm -rf ./*.tar.gz
 rm -rf /opt/Anaconda3-2022.05-Linux-x86_64.sh
 rm -rf /opt/rstudio-server-rhel-2022.02.3-492-x86_64.rpm 
 rm -rf /opt/julia-1.7.3-linux-x86_64.tar.gz
