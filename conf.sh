@@ -1,4 +1,7 @@
-gnome-terminal --window --title="CONF_STEP1" -- bash -c "sudo wget -P /opt https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh;sudo sh /opt/Anaconda3-2022.05-Linux-x86_64.sh;gnome-terminal --window --title='CONF_STEP2' -- bash -c 'sudo su - <<EOF
+#!/bin/bash
+set -e
+
+gnome-terminal --window --title="CONF_STEP1" -- bash -c "sudo wget -P /opt https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh;sudo sh /opt/Anaconda3-2022.05-Linux-x86_64.sh;gnome-terminal --window --title='CONF_STEP2' -- bash -c 'sudo su - <<'EOF'
 echo config-step 2 start
 subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms
 dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
@@ -8,7 +11,7 @@ yum install R -y
 curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
 yum install nodejs -y
 yum install gcc-* -y
-wget -P /opt https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2022.02.3-492-x86_64.rpm -y
+wget -P /opt https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2022.02.3-492-x86_64.rpm
 yum install /opt/rstudio-server-rhel-2022.02.3-492-x86_64.rpm -y
 rstudio-server start
 curl -fsSL https://code-server.dev/install.sh | sh
@@ -59,14 +62,14 @@ for i in $process
 do
   rpm -e --nodeps $i
 done
-rpm -ivh jdk-18_linux-x64_bin.rpm
+rpm -ivh /opt/jdk-18_linux-x64_bin.rpm
 
 cat <<'EOF_in' >> /etc/profile
 export JAVA_HOME=/usr/java/jdk-18.0.1.1
 export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOMR/bin
 EOF_in
-
+source /etc/profile
 conda create -n java -y
 conda activate java
 conda install conda -y 
@@ -78,7 +81,7 @@ cp -r /opt/anaconda3/envs/java/share/jupyter/kernels/java /opt/anaconda3/envs/jp
 
 npm install -g ijavascript
 ijsinstall
- cp -r /root/.local/share/jupyter/kernels/javascript /opt/anaconda3/envs/jp/share/jupyter/kernels/javascript
+cp -r /root/.local/share/jupyter/kernels/javascript /opt/anaconda3/envs/jp/share/jupyter/kernels/javascript
 
 conda create -n ssh -y
 conda activate ssh
@@ -125,12 +128,11 @@ pip install ipykernel
 pip install bash_kernel
 python -m bash_kernel.install
 
-
 conda create -n tensorflow python=3.9 -y
 conda activate tensorflow
 conda install conda -y
 pip install ipykernel
-conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 -y
 cat <<'EOF_in' >> /etc/profile
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
 EOF_in
@@ -158,26 +160,6 @@ conda install matplotlib -y
 pip install sklearn
 
 
-#conda create -n caffe -y
-#conda activate caffe
-#conda install conda -y
-#pip install ipykernel
-#yum install protobuf-devel leveldb-devel snappy-devel opencv-devel boost-devel hdf5-devel -y
-#yum install gflags-devel glog-devel lmdb-devel -y
-#wget -P /opt https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/google-glog/glog-0.3.3.tar.gz
-#tar -zxvf /opt/glog-0.3.3.tar.gz -C /opt
-#cd /opt/glog-0.3.3
-#./configure
-#make && make install
-#wget -P /opt https://github.com/schuhschuh/gflags/archive/master.zip
-#unzip /opt/master.zip -d /opt
-#cd /opt/flags-master
-#mkdir build && cd build
-#export CXXFLAGS="-fPIC" && cmake .. && make VERBOSE=1
-#make && make install
-#git clone https://github.com/LMDB/lmdb
-#cd lmdb/libraries/liblmdb
-#make && make install
 
 wget -P /opt https://downloadsapachefriends.global.ssl.fastly.net/8.1.6/xampp-linux-x64-8.1.6-0-installer.run
 chmod 777 /opt/xampp-linux-x64-8.1.6-0-installer.run
@@ -232,6 +214,7 @@ rm -rf /opt/rstudio-server-rhel-2022.02.3-492-x86_64.rpm
 rm -rf /opt/julia-1.7.3-linux-x86_64.tar.gz
 rm -rf /opt/jdk-18_linux-x64_bin.rpm
 rm -rf /opt/ijava-1.3.0.zip
+sleep 999999
 EOF';gnome-terminal --window --title='CONF_STEP2' -- bash -c 'cat <<'EOF_in' >~/Jconf.jl
 import Pkg
 Pkg.add('IJulia')
