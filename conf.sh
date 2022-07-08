@@ -20,6 +20,7 @@ conda create -n jp --clone base
 conda activate jp
 pip install jupyterhub jupyterlab
 npm install -g configurable-http-proxy
+pip install ipywidgets
 yum install octave -y
 jupyter labextension install @jupyterlab/hub-extension
 pip install jupyter-server-proxy
