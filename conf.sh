@@ -133,12 +133,8 @@ conda create -n tensorflow python=3.9 -y
 conda activate tensorflow
 conda install conda -y
 pip install ipykernel
-conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0 -y
-cat <<'EOF_in' >> /etc/profile
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
-EOF_in
-source /etc/profile
-python3 -m pip install tensorflow
+conda install tensorflow -y
+conda install tensorflow-gpu -y
 conda install pandas -y
 conda install keras -y
 conda install numba -y
@@ -168,35 +164,35 @@ chmod 777 /opt/xampp-linux-x64-8.1.6-0-installer.run
 yum install nginx -y
 cp -r /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 
-wget -P /opt/jetbrain https://download.jetbrains.com/cpp/CLion-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/cpp/CLion-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://download.jetbrains.com/datagrip/datagrip-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/datagrip/datagrip-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://download.jetbrains.com/go/goland-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/go/goland-2021.1.3.tar.gz
 
 
-wget -P /opt/jetbrain https://download.jetbrains.com/idea/ideaIU-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/idea/ideaIU-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://download.jetbrains.com/webide/PhpStorm-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/webide/PhpStorm-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://download.jetbrains.com/python/pycharm-professional-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/python/pycharm-professional-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://download.jetbrains.com/ruby/RubyMine-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/ruby/RubyMine-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.tar.gz
+wget -P /opt/Jetbrain https://download.jetbrains.com/webstorm/WebStorm-2021.1.3.tar.gz
 
-wget -P /opt/jetbrain https://github.com/Martin-Li-96/RHEL-Jupyterhub-with-additional-kernel-nginx-apache/releases/download/beta/ide-eval-resetter-2.1.9.zip
+wget -P /opt/Jetbrain https://github.com/Martin-Li-96/RHEL-Jupyterhub-with-additional-kernel-nginx-apache/releases/download/beta/ide-eval-resetter-2.1.9.zip
 
 cd /opt/jetbrain
-tar -zvxf /opt/jetbrain/CLion-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/datagrip-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/goland-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/ideaIU-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/PhpStorm-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/pycharm-professional-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/RubyMine-2021.1.3.tar.gz
-tar -zvxf /opt/jetbrain/WebStorm-2021.1.3.tar.gz
-
+tar -zvxf /opt/Jetbrain/CLion-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/datagrip-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/goland-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/ideaIU-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/PhpStorm-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/pycharm-professional-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/RubyMine-2021.1.3.tar.gz
+tar -zvxf /opt/Jetbrain/WebStorm-2021.1.3.tar.gz
+rm -rf *.tar.gz
 
 cat <<'EOF_in' >> /etc/profile
 export PATH=$PATH:/opt/Jetbrain/clion-2021.1.3/bin
@@ -215,7 +211,10 @@ rm -rf /opt/rstudio-server-rhel-2022.02.3-492-x86_64.rpm
 rm -rf /opt/julia-1.7.3-linux-x86_64.tar.gz
 rm -rf /opt/jdk-18_linux-x64_bin.rpm
 rm -rf /opt/ijava-1.3.0.zip
-sleep 999999
+
+
+
+
 EOF';gnome-terminal --window --title='CONF_STEP2' -- bash -c 'cat <<'EOF_in' >~/Jconf.jl
 import Pkg
 Pkg.add('IJulia')
