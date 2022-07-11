@@ -210,10 +210,12 @@ rm -rf /opt/julia-1.7.3-linux-x86_64.tar.gz
 rm -rf /opt/jdk-18_linux-x64_bin.rpm
 rm -rf /opt/ijava-1.3.0.zip
 
-
+yum install -y libnsl*
 wget -P /opt https://downloadsapachefriends.global.ssl.fastly.net/8.1.6/xampp-linux-x64-8.1.6-0-installer.run
 chmod 777 /opt/xampp-linux-x64-8.1.6-0-installer.run
 /opt/xampp-linux-x64-8.1.6-0-installer.run --mode text
+
+
 
 
 
