@@ -10,7 +10,9 @@ sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.
 sudo yum install -y  https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm
 sudo yum install -y http://rpmfind.net/linux/centos/8-stream/PowerTools/x86_64/os/Packages/SDL2-2.0.10-2.el8.x86_64.rpm
 sudo yum install -y ffmpeg*
-
+wget -P /opt/config https://github.com/Martin-Li-96/RHEL-Jupyterhub-with-additional-kernel-nginx-apache/releases/download/beta2/profile.py
+python /opt/config/profile.py
+source /etc/profile
 yum update -y
 yum install gnome-* -y
 yum install R -y
@@ -55,12 +57,6 @@ cp -r /opt/anaconda3/envs/fortran/share/jupyter/kernels/fortran /opt/anaconda3/e
 wget -P /opt/config https://julialang-s3.julialang.org/bin/linux/x64/1.7/julia-1.7.3-linux-x86_64.tar.gz
 tar -zvxf /opt/config/julia-1.7.3-linux-x86_64.tar.gz -C /opt
 
-mkdir /opt/config/tmp
-cat <<'EOF_in' >/opt/config/tmp/juliaconf.py
-with open('/etc/profile') as fp:
-	fp.write('export PATH=$PATH:/opt/julia-1.7.3/bin\n')
-EOF_in
-python /opt/config/tmp/juliaconf.py
 source /etc/profile
 mkdir /opt/config/julia
 cat <<'EOF_in' >/opt/config/julia/Jconf.jl
@@ -76,14 +72,6 @@ do
 done
 rpm -ivh /opt/jdk-18_linux-x64_bin.rpm
 
-cat <<'EOF_in' >/opt/config/tmp/javaconf.py
-with open('/etc/profile') as fp:
-	fp.write('export JAVA_HOME=/usr/java/jdk-18.0.1.1\n')
-	fp.write('export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib\n')
-	fp.write('export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOMR/bin\n')
-EOF_in
-python /opt/config/tmp/javaconf.py
-source /etc/profile
 conda create -n java -y
 conda activate java
 conda install conda -y 
@@ -179,19 +167,6 @@ tar -zvxf /opt/Jetbrain/RubyMine-2021.1.3.tar.gz
 tar -zvxf /opt/Jetbrain/WebStorm-2021.1.3.tar.gz
 rm -rf *.tar.gz
 
-cat <<'EOF_in' >/opt/config/tmp/jetbrain.py
-with open('/etc/profile') as fp:
-	fp.write('export PATH=$PATH:/opt/Jetbrain/clion-2021.1.3/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/DataGrip-2021.1.3/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/GoLand-2021.1.3/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/idea-IU-211.7628.21/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/PhpStorm-211.7442.50/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/pycharm-2021.1.3/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/RubyMine-2021.1.3/bin\n')
-	fp.write('export PATH=$PATH:/opt/Jetbrain/WebStorm-211.7628.25/bin\n')
-EOF_in
-python /opt/config/tmp/jetbrain.py
-source /etc/profile
 rm -rf /opt/config
 
 
