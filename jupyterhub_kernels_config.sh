@@ -170,49 +170,6 @@ rm -rf *.tar.gz
 rm -rf /opt/config
 
 
-sudo dnf install epel-release dnf-utils
-sudo yum-config-manager --set-enabled PowerTools
-sudo yum-config-manager --add-repo=https://negativo17.org/repos/epel-multimedia.repo
-
-sudo dnf install -y epel-release git gcc gcc-c++ cmake3 qt5-qtbase-devel \
-    python3 python3-devel python3-pip cmake python3-devel python3-numpy \
-    gtk2-devel libpng-devel jasper-devel openexr-devel libwebp-devel \
-    libjpeg-turbo-devel libtiff-devel tbb-devel libv4l-devel \
-    eigen3-devel freeglut-devel mesa-libGL mesa-libGL-devel \
-    boost boost-thread boost-devel gstreamer1-plugins-base
-
-
-mkdir ~/opencv_build && cd ~/opencv_build
-git clone https://github.com/opencv/opencv.git
-git clone https://github.com/opencv/opencv_contrib.git
-cd ~/opencv_build/opencv && mkdir build && cd build
-
-cmake3 -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX=/usr/local \
--D INSTALL_C_EXAMPLES=ON \
--D INSTALL_PYTHON_EXAMPLES=ON \
--D OPENCV_GENERATE_PKGCONFIG=ON \
--D OPENCV_EXTRA_MODULES_PATH=~/opencv_build/opencv_contrib/modules \
--D BUILD_EXAMPLES=ON \
--D WITH_CUDA=ON \
--D CUDA_ARCH_BIN=7.5 \
--D CUDA_ARCH_PTX="" \
--D WITH_CUDNN=ON \
--D WITH_CUBLAS=ON \
--D ENABLE_FAST_MATH=ON \
--D CUDA_FAST_MATH=ON \
--D OPENCV_DNN_CUDA=ON \
--D WITH_FFMPEG=ON \
--D INSTALL_C_EXAMPLES=ON \
--D INSTALL_PYTHON_EXAMPLES=ON \
--D OPENCV_GENERATE_PKGCONFIG=ON \
--D BUILD_EXAMPLES=ON ..
-
-make -j16
-sudo make install
-sudo ln -s /usr/local/lib64/pkgconfig/opencv4.pc /usr/share/pkgconfig/
-sudo ldconfig
-
 yum install -y libnsl*
 wget -P /opt https://downloadsapachefriends.global.ssl.fastly.net/8.1.6/xampp-linux-x64-8.1.6-0-installer.run
 chmod 777 /opt/xampp-linux-x64-8.1.6-0-installer.run
